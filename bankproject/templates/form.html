@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Form</title>
+</head>
+<body>
+<center>
+<h2>Form</h2>
+
+<form action='form' method='post'>
+    {% csrf_token %}
+    <input type="text" name="name" placeholder="Enter the Name"><br>
+    <br>
+    DOB : <input type="date" name="dob" placeholder="Enter DOB"><br>
+    <br>
+    <input type="number" name="age" placeholder="Enter Age"><br>
+    <br>
+    <input type="text" name="gender" placeholder="Gender"><br>
+    <br>
+    <input type="text" name="phonenumber" placeholder="Enter Phone Number"><br>
+    <br>
+    <input type="email" name="mailid" placeholder="Enter Mail id"><br>
+    <br>
+    <input type="text" name="address" placeholder="Enter Address"><br>
+    <br>
+
+    <label for="district">District:</label>
+        <select name="district" id="district" onchange="populateBranch()">
+            <option value="" selected disabled>Select District</option>
+            <option value="kollam">Kollam</option>
+            <option value="ernakulam">Ernakulam</option>
+            <option value="kozhikode">Kozhikode</option>
+            <option value="thrissur">Thrissur</option>
+            <option value="kottayam">Kottayam</option>
+        </select><br>
+    <br>
+    <label for="branch">Branch: </label>
+        <select name="branch" id="branch">
+            <option value="" selected disabled> Select the Branch</option>
+        </select>
+    <br><br>
+    <script>
+        var branch={
+            kollam:['Kulasekharapuram', 'Mayyanad', 'Meenad', 'Nedumpana'],
+            ernakulam:['Mattancherry','Bolgatty', 'Hill Palace'],
+            kozhikode:['Vatakara', 'Cheruvannur', 'Thiruvambadi', 'Feroke'],
+            thrissur:[ 'Athirapally','Charpa','Vadakummnathan' ],
+            kottayam:['Pala','Ettumanoor','Vaikom'],
+        };
+        var districtSelect=document.getElementById('district');
+        var branchSelect=document.getElementById('branch');
+
+        function populateBranch() {
+            branchSelect.innerHTML='<option value="">Select a Branch</option>';
+
+            var selectedDistrict=districtSelect.value;
+            if (selectedDistrict){
+                var selectedBranch=branch[selectedDistrict];
+                selectedBranch.forEach(function(branc){
+                    var option=document.createElement('option');
+                    option.value=branc;
+                    option.text=branc;
+                    branchSelect.appendChild(option);
+                });
+            }
+        }
+    </script>
+    <label for="accounttype">Type:</label>
+        <select name="accounttype" id="accounttype">
+            <option value="" selected disabled> Account Type</option>
+            <option value="save">Savings Account</option>
+            <option value="current">Current Account</option>
+            <option value="fixed">Fixed Deposit</option>
+        </select><br><br>
+    <h4>Materials Provided:</h4>
+         <input type="checkbox" id="materials1" name="materials1" value="cheque">
+                <label for="materials1"> Cheque Book </label>
+            <input type="checkbox" id="materials2" name="materials2" value="pass">
+                <label for="materials2">  Pass Book   </label><br>
+            <input type="checkbox" id="materials3" name="materials3" value="card">
+                <label for="materials3"> Debit Card  </label>
+            <input type="checkbox" id="materials4" name="materials4" value="card">
+                <label for="materials4"> Credit Card </label><br><br>
+
+    <button onclick="myalert()">Submit</button>
+    <script>
+        function myalert() {
+            alert("Application Accepted");}
+    </script>
+    <br>
+    <br>
+    <li><button href="logout">Logout</button></li><br>
+
+</form>
+</center>
+</body>
+</html>
